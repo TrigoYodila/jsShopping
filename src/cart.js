@@ -15,9 +15,10 @@ calculation();
 //function de géneration des cartes
 let generateCartItems = () => {
   if (basket.length !== 0) {
-    return (ShoppingCart.innerHTML = basket.map((x)=>{
-        let {id,item} = x;
-        let search = shopItemsData.find((y)=> y.id === id) || [];
+    return (ShoppingCart.innerHTML = basket
+      .map((x) => {
+        let { id, item } = x;
+        let search = shopItemsData.find((y) => y.id === id) || [];
         //console.log("rep : " + search);
         return `
         <div class="cart-item">
@@ -44,7 +45,8 @@ let generateCartItems = () => {
             </div>
         </div>
         `;
-    }).join(""));
+      })
+      .join(""));
   } else {
     //panier est vide, on définie les éléments html qui s'affichera
     ShoppingCart.innerHTML = ``;
@@ -85,7 +87,7 @@ let increment = (id) => {
   localStorage.setItem("data", JSON.stringify(basket));
 };
 
-let decrement = (id) => { 
+let decrement = (id) => {
   let selectedItem = id;
   let search = basket.find((x) => x.id === selectedItem.id);
   //console.log(search);
@@ -117,5 +119,19 @@ let removeItem = (id) => {
   basket = basket.filter((x) => x.id !== selectedItem.id);
   generateCartItems();
   localStorage.setItem("data", JSON.stringify(basket));
-  
 };
+
+let TotalAmount = () => {
+  if (basket.length !== 0) {
+    let amount = basket
+      .map((x) => {
+        let { id, item } = x;
+        let search = shopItemsData.find((y) => y.id === id) || [];
+        return item * search.price;
+      })
+      .reduce((x, y) => x + y, 0);
+    //console.log(amount);
+  } else return;
+};
+
+TotalAmount();

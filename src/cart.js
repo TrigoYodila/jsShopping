@@ -111,6 +111,7 @@ let update = (id) => {
   document.getElementById(id).innerHTML = search.item;
   calculation();
   generateCartItems();
+  TotalAmount();
 };
 
 let removeItem = (id) => {
@@ -118,8 +119,17 @@ let removeItem = (id) => {
   // console.log(selectedItem);
   basket = basket.filter((x) => x.id !== selectedItem.id);
   generateCartItems();
+  TotalAmount();
+  calculation();
   localStorage.setItem("data", JSON.stringify(basket));
 };
+
+let clearCart = () => {
+    basket = [];
+    generateCartItems();
+    localStorage.setItem("data", JSON.stringify(basket));
+    calculation();
+}
 
 let TotalAmount = () => {
   if (basket.length !== 0) {
@@ -131,6 +141,10 @@ let TotalAmount = () => {
       })
       .reduce((x, y) => x + y, 0);
     //console.log(amount);
+    label.innerHTML = `
+    <h2>Total Bill : $ ${amount}</h2>
+    <button class="checkout">Vérifier</button>
+    <button onclick="clearCart()" class="removeAll">Vider panier </button>`;
   } else return;
 };
 

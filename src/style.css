@@ -60,14 +60,18 @@ a{
   grid-template-columns: repeat(4, 223px);
   gap: 30px;
   justify-content: center;
+  margin-bottom: 50px;
 }
 
 .item {
   border: 2px solid #212529;
   border-radius: 4px;
 }
-
-.detail{
+.item img{
+  width: 100%;
+  border-radius: 2px 2px 0 0;
+}
+.details{
     display: flex;
     flex-direction: column;
     padding: 10px;
@@ -161,7 +165,7 @@ a{
 **/
 
 .title-price-x{
-  width: 210px;
+  width: 198px;
   display: flex;
   align-items: center;
   justify-content: space-between;
